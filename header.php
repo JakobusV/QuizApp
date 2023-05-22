@@ -42,14 +42,17 @@ function GenerateNavigationElement() {
 function BuildPagesArray() {
     $pages = array(
         "Home"=>"index.php",
-        "Profile"=>"profile.php",
         "Find-A-Quiz"=>"quizzes.php",
     );
 
-    if (GetCookie('login'))
+    if (GetCookie('login')) {
+        $pages["Profile"] = 'userPage.php';
         $pages["Logout"] = "logout.php";
-    else
+    }
+    else {
+        $pages["Create Account"] = "createAccount.php";
         $pages["Login"] = "login.php";
+    }
 
     return $pages;
 }
