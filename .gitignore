@@ -361,4 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# ENV VAR PHP
 /backend/personalConnectionDetails.php
