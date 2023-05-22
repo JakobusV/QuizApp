@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans';
+    background: rgb(218, 0, 80);
+    background: linear-gradient(0deg, rgba(218, 0, 80, 1) 0%, rgba(142, 43, 136, 1) 100%);
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.navLinks {
+    display: flex;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    z-index: 1;
+    border-bottom: 3px solid white;
+}
+
+.navLinks a {
+    color: white;
+    padding: 12px 16px;
+    display: block;
+}
+
+.navLinks a:hover {
+    color: black;
+    background-color: white;
+}
+
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid white;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    padding: 40px 50px;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.body-title a {
+    padding: 8px;
+    background-color: white;
+    color: black;
+    border-radius: 16px;
+    opacity: 0.75;
+}
+
+.body-title a:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.inputs {
+    border: none;
+    border-bottom: 1px solid #8e2b88;
+    background: none;
+    font-size: 14px;
+}
+
+.login-btn {
+    align-self: center;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+    margin: 10px;
+    width: 200px;
+    background: rgb(218, 0, 80);
+    background: linear-gradient(70deg, rgba(218, 0, 80, 1) 0%, rgba(142, 43, 136, 1) 100%);
+    margin-top: 20px;
+    padding: 5px;
+}
