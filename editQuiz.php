@@ -1,3 +1,8 @@
+<?php
+include 'header.php';
+
+echo GenerateHeader('Edit Quiz Page', array('editQuiz.css'));
+?>
 <div class="navlinks">
     <a>test 1</a>
     <a>test 2</a>

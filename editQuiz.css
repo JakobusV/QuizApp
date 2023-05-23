@@ -43,8 +43,8 @@ body {
 }
 
 .color-banner {
-    background: rgb(218, 0, 80);
-    height: 200px;
+    background: #316bff;
+    height: 130px;
     width: 100%;
     border-radius: 10px 10px 0px 0px;
 }

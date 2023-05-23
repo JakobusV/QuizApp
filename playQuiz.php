@@ -1,5 +1,7 @@
 <?php
+include 'header.php';
 
+echo GenerateHeader('Play Quiz Page', array('playQuiz.css'));
 ?>
 <div class="navlinks">
     <a>test 1</a>

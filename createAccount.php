@@ -1,5 +1,7 @@
 <?php
+include 'header.php';
 
+echo GenerateHeader('Create Account Page', array('createUser.css'));
 ?>
 <div class="body-container">
     <div class="login-container">

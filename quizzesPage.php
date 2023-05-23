@@ -1,3 +1,9 @@
+<?php
+include 'header.php';
+
+echo GenerateHeader('Quizzes Page', array('quizzesPage.css'));
+?>
+
 <div class="navlinks">
     <a>test 1</a>
     <a>test 2</a>
@@ -12,7 +18,7 @@
             <input class="search-bar" placeholder="search quizzes" />
         </div>
         <div class="quizzes-container">
-            <a class="quiz-card">
+            <a class="quiz-card" href="./playQuiz.php">
                 <div class="quiz-body">
                     <div class="quiz-title">Quiz Name</div>
                     <p>Description</p>
