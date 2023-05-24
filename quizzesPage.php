@@ -15,7 +15,10 @@ echo GenerateHeader('Quizzes Page', array('quizzesPage.css'));
             <div>Quiztopia</div>
         </div>
         <div class="utility-bar">
-            <input class="search-bar" placeholder="search quizzes" />
+            <div class="search-bar">
+                <img src="./search.png"/>
+                <input placeholder="search quizzes" />
+            </div>
         </div>
         <div class="quizzes-container">
             <a class="quiz-card" href="./playQuiz.php">

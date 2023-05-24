@@ -69,10 +69,22 @@ body {
 }
 
 .search-bar {
-    font-size: 16px;
     border: 1px solid gray;
     border-radius: 10px;
     padding: 5px 5px;
+    width: 250px;
+    display: flex;
+}
+.search-bar img{
+    width: 20px;
+    height: 20px;
+}
+
+.search-bar input{
+    border: none;
+    text-decoration: none;
+    width: 100%;
+    font-size: 16px;
 }
 
 .quizzes-container {
