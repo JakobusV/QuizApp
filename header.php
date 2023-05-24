@@ -45,9 +45,14 @@ function BuildPagesArray() {
         "Find-A-Quiz"=>"quizzesPage.php",
     );
 
-    if (GetCookie('login')) {
-        $pages["Profile"] = 'userPage.php';
+    $userSession = GetSession('current_user');
+
+    if ($userSession != null) {
+        $pages["Profile"] = 'userPage.php?u='.$userSession['username'];
         $pages["Logout"] = "logout.php";
+
+        if ($userSession['auth'] == 1)
+            $pages['Admin'] = 'admin.php';
     }
     else {
         $pages["Create Account"] = "createAccount.php";
