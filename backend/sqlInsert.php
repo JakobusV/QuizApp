@@ -26,7 +26,7 @@ if (array_key_exists("table", $_GET)) {
                 $json = questionInsert($data);
                 break;
             default:
-                $json = "Unknown Table";
+                $json = "Invalid Table";
         }
 
         // If the data sent was invalid caught by the insert methods
