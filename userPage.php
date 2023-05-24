@@ -1,3 +1,9 @@
+<?php
+include 'header.php';
+
+echo GenerateHeader('User Page', array('userPage.css'));
+?>
+
 <div class="navlinks">
     <a>test 1</a>
     <a>test 2</a>
@@ -6,11 +12,11 @@
 <div class="body-container">
     <div class="info-container">
         <div class="gradient-banner"></div>
-        <div class="login-container">
+        <div class="user-container">
             <h2>Fake User</h2>
             <p>Your Quizzes</p>
             <div class="quizzes-container">
-                <a class="quiz-card">
+                <a class="quiz-card" href="./editQuiz.php">
                     <div class="quiz-body">
                         <div class="quiz-title">Quiz Name</div>
                         <p>Description</p>

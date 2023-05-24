@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Open Sans';
-    background: #383737;
+    background: #009cff;
     height: 100%;
 }
 
@@ -40,6 +40,7 @@ body {
     background-color: rgba(255, 255, 255, 1);
     border-radius: 11px 11px 10px 10px;
     margin-top: 50px;
+    overflow: hidden;
 }
 
 .gradient-banner {
@@ -50,30 +51,49 @@ body {
     border-radius: 10px 10px 0px 0px;
 }
 
-.user-container {
-    padding: 30px 40px;
-    padding-top: 50px;
+.gradient-banner div {
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    animation-name: flyIn;
+    animation-duration: 2s;
+
 }
 
-.user-banner {
+.utility-bar {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+}
+
+.search-bar {
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px 5px;
+    width: 250px;
     display: flex;
-    flex-direction: column;
+}
+.search-bar img{
+    width: 20px;
+    height: 20px;
 }
 
-.profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: white;
-    transform: translate(-200%, 95%);
-    position: absolute;
+.search-bar input{
+    border: none;
+    text-decoration: none;
+    width: 100%;
+    font-size: 16px;
 }
 
 .quizzes-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 30px 40px;
+    padding-top: 50px;
+    justify-content: center;
 }
 
 .quiz-card {
@@ -109,15 +129,20 @@ body {
     margin-top: 1px;
 }
 
-.body-title a {
-    padding: 8px;
-    background-color: white;
-    color: black;
-    border-radius: 16px;
-    opacity: 0.75;
-}
+@keyframes flyIn {
+    0% {
+        transform: translate(0%, 120%);
+    }
 
-.body-title a:hover {
-    opacity: 1;
-    cursor: pointer;
+    80% {
+        transform: translate(0%, -15%);
+    }
+
+    90% {
+        transform: translate(0%, 5%);
+    }
+
+    100% {
+        transform: translate(0%, 0%);
+    }
 }
