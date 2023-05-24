@@ -12,7 +12,7 @@ echo GenerateHeader('Quizzes Page', array('quizzesPage.css'));
 <div class="body-container">
     <div class="info-container">
         <div class="gradient-banner">
-            <div>Quiztopia</div>
+            <div>Quiz Wall</div>
         </div>
         <div class="utility-bar">
             <div class="search-bar">
