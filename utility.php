@@ -76,9 +76,9 @@ function DestroySession($name){
     }
 }
 
-function LoggedInConfirmed($email, $password, $auth) {
-    if(!isset($_SESSION[$email])){
-        CreateSession("current_user", array('email'=>$email, 'password'=>$password, 'auth'=>$auth));
+function LoggedInConfirmed($username, $password, $auth) {
+    if(!isset($_SESSION['current_user'])){
+        CreateSession("current_user", array('username'=>$username, 'password'=>$password, 'auth'=>$auth));
     } else {
         //TODO: Handle re-login
     }

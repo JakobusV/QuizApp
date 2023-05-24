@@ -67,4 +67,25 @@ function CreateLinkTags($additionalStylesheets = array()) {
     }
     return $returnVal;
 }
+
+/**
+ * Checks user session for logged in session. If admin is true, checks if the current user is an admin as well.
+ * @param bool $admin Set to true to check for admin account, defaults to false.
+ */
+function CanIBeHere($admin = false) {
+    $loginURL = 'login.php';
+    $profileURL = 'profile.php';
+
+    $userSession = GetSession("current_user");
+    if ($userSession == null) {
+        header('Location: '.$loginURL);
+        die();
+    }
+    else if ($admin)
+    {
+        if (!isset($userSession["auth"]) || $userSession['auth'] == 0)
+            header('Location: '.$profileURL);
+    }
+
+}
 ?>
