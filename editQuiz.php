@@ -12,6 +12,7 @@ echo GenerateHeader('Edit Quiz Page', array('editQuiz.css'));
     <div class="info-container">
         <div class="color-banner"></div>
         <div class="options-container">
+            <img class="del-icon" src="./delete.png"/>
             <h2>Edit/Create Quiz</h2>
 
             <div class="inputs-container">
