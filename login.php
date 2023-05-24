@@ -10,11 +10,15 @@ GenerateHeader("Login Page", ['login.css']);
         <div class="login-container">
             <h2>Login</h2>
             <p>Username</p>
-            <input class="inputs" />
+            <input id="Username" class="inputs" />
             <p>Password</p>
-            <input class="inputs" />
-            <button class="login-btn">Login</button>
+            <input id="password" class="inputs" />
+            <button onclick="Login()" class="login-btn">Login</button>
         </div>
     </div>
 </body>
+
+<script>
+    function Login()
+</script>
 <?php
