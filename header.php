@@ -22,7 +22,7 @@ function GenerateHeader($title, $stylesheets = array()) {
 function GenerateNavigationElement() {
     $pages = BuildPagesArray();
 
-    $navigationElement = '<nav>';
+    $navigationElement = '<nav class="navlinks">';
     foreach (array_keys($pages) as $pageKey)
     {
         $page = $pages[$pageKey];
@@ -42,14 +42,17 @@ function GenerateNavigationElement() {
 function BuildPagesArray() {
     $pages = array(
         "Home"=>"index.php",
-        "Profile"=>"profile.php",
-        "Find-A-Quiz"=>"quizzes.php",
+        "Find-A-Quiz"=>"quizzesPage.php",
     );
 
-    if (GetCookie('login'))
+    if (GetCookie('login')) {
+        $pages["Profile"] = 'userPage.php';
         $pages["Logout"] = "logout.php";
-    else
+    }
+    else {
+        $pages["Create Account"] = "createAccount.php";
         $pages["Login"] = "login.php";
+    }
 
     return $pages;
 }
