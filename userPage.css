@@ -23,6 +23,7 @@ body {
 .navLinks a:hover {
     color: black;
     background-color: white;
+    cursor: pointer;
 }
 
 .body-container {
@@ -91,6 +92,7 @@ body {
 
 .quiz-card:hover {
     border: 1px solid white;
+    cursor: pointer;
 }
 
 .quiz-body {

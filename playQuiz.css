@@ -23,6 +23,7 @@ body {
 .navLinks a:hover {
     color: black;
     background-color: white;
+    cursor: pointer;
 }
 
 .body-container {
@@ -63,6 +64,7 @@ body {
 
 .answer-btn:hover {
     border: 1px solid white;
+    cursor: pointer;
 }
 
 .answer-box {
@@ -106,4 +108,5 @@ body {
 
 .option-btn:hover {
     border: 1px solid white;
+    cursor: pointer;
 }

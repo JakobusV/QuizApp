@@ -29,6 +29,7 @@ body {
 .navLinks a:hover {
     color: black;
     background-color: white;
+    cursor: pointer;
 }
 
 .title-img{
