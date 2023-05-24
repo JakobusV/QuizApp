@@ -22,7 +22,7 @@ function GenerateHeader($title, $stylesheets = array()) {
 function GenerateNavigationElement() {
     $pages = BuildPagesArray();
 
-    $navigationElement = '<nav class="navLinks">';
+    $navigationElement = '<nav>';
     foreach (array_keys($pages) as $pageKey)
     {
         $page = $pages[$pageKey];
