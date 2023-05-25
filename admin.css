@@ -1,0 +1,33 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans';
+    background: rgb(218, 0, 80);
+    background: linear-gradient(0deg, rgba(218, 0, 80, 1) 0%, rgba(142, 43, 136, 1) 100%);
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.navLinks {
+    display: flex;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    z-index: 1;
+    border-bottom: 3px solid white;
+}
+
+.navLinks a {
+    color: white;
+    padding: 12px 16px;
+    display: block;
+}
+
+.navLinks a:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
