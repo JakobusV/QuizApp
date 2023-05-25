@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+include_once 'questionCard.php';
 GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
 ?>
 <body>
@@ -8,7 +9,7 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
     ?>
     <div class="body-container">
         <div class="info-container">
-            <div class="color-banner"></div>
+            <div id="quiz-color-banner" class="color-banner"></div>
             <div class="options-container">
                 <img class="del-icon" src="./delete.png" />
                 <h2>Edit/Create Quiz</h2>
@@ -17,29 +18,12 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
                     <label for="title">Title</label>
                     <input id="title" placeholder="My Quiz" class="inputs" />
                     <label for="color">Color</label>
-                    <input id="color" placeholder="#ffffff" class="inputs" />
+                    <input id="color" placeholder="#ffffff" value="#316bff" class="inputs" oninput="OnColorChanged()"/>
                     <p>Questions:</p>
-                    <div class="question-card">
-                        <h3>Question 1</h3>
-                        <label for="title">Question</label>
-                        <input id="title" class="inputs" />
-                        <div class="answer-box">
-                            <label for="title">Correct Answer</label>
-                            <input id="title" class="inputs" />
-                        </div>
-                        <div class="answer-box">
-                            <label for="title">Wrong Answer 1</label>
-                            <input id="title" class="inputs" />
-                        </div>
-                        <div class="answer-box">
-                            <label for="title">Wrong Answer 2</label>
-                            <input id="title" class="inputs" />
-                        </div>
-                        <div class="answer-box">
-                            <label for="title">Wrong Answer 3</label>
-                            <input id="title" class="inputs" />
-                        </div>
-                    </div>
+                    <?php 
+                        GenerateQuestionBox();
+                        GenerateQuestionBox(2);
+                    ?>
                     <button class="option-btn">Add Question</button>
                     <button class="option-btn">Save</button>
                 </div>
@@ -47,4 +31,28 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         </div>
     </div>
 </body>
+<script type="text/javascript">
+    if(getURLParameter('update') == true){
+        //load data current from database
+        var request = new XMLHttpRequest();
+
+    }else {
+        //generate a default question box
+    }
+
+    function OnColorChanged(){
+        let hexcolor = document.getElementById("color").value;
+        //WARNING: Only save the DOM elements current color in the database not what the user entered.
+        if(hexcolor.length == 7 && hexcolor[0] == '#'){
+            document.getElementById("quiz-color-banner").style.background = hexcolor;
+        } else {
+            //alert("invalid hex color");
+        }
+    }
+
+    getURLParameter = (parameterKey) => {
+        const URLParams = new URLSearchParams(window.location.search);
+        return URLParams.get(parameterKey);
+    }
+</script>
 <?php

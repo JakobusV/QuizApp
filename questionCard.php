@@ -1,8 +1,8 @@
 <?php
-function GenerateQuestionBox($question, $correctAnswer, $incorrectAnswers){
-    return '
+function GenerateQuestionBox($number=1, $question='none', $correctAnswer='none', $incorrectAnswers=array('none', 'none', 'none')){
+    echo '
     <div class="question-card">
-        <h3>Question 1</h3>
+        <h3>Question '. $number .'</h3>
         <label for="title">Question</label>
         <input id="title" class="inputs" value="'. $question .'" />
         <div class="answer-box">
