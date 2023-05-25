@@ -31,3 +31,10 @@ body {
     background-color: white;
     cursor: pointer;
 }
+
+table {
+    margin: 20px;
+    background-color: white;
+    box-shadow: black 5px 5px 10px 5px;
+    padding: 20px;
+}
