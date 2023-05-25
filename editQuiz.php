@@ -39,7 +39,6 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
                             <label for="title">Wrong Answer 3</label>
                             <input id="title" class="inputs" />
                         </div>
-
                     </div>
                     <button class="option-btn">Add Question</button>
                     <button class="option-btn">Save</button>

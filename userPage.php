@@ -50,4 +50,8 @@ GenerateHeader('User Page', ['userPage.css']);
             src="https://th.bing.com/th/id/R.6e0f2f6bab06c008c79a3b280db49342?rik=jsupiHsPJSF3lA&riu=http%3a%2f%2fassets0.prcdn.com%2fuk%2fpeople%2fdefault-profile.png%3f1406639312&ehk=fgzMewvFjuDc4jTAGFrQAJ%2fhZD3vLHtzxhxb%2bnle3cU%3d&risl=&pid=ImgRaw&r=0" />
     </div>
 </body>
+<script type="text/javascript">
+    var request = new XMLHttpRequest();
+
+</script>
 <?php
