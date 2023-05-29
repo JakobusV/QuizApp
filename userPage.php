@@ -3,9 +3,7 @@ include_once 'header.php';
 include_once 'backend/backendUtils.php';
 include_once 'backend/models.php';
 GenerateHeader('User Page', ['userPage.css']);
-//CanIBeHere();
-
-
+CanIBeHere();
 
 ?>
 <body>
