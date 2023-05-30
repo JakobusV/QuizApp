@@ -34,32 +34,41 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
     </div>
 </body>
 <script type="text/javascript">
-    if(getURLParameter('update') == true){
-        //load data current from database
+
+    function createQuiz() {
         var request = new XMLHttpRequest();
         const id = getURLParameter("quiz_id");
 
-        const address = "./backend/sqlSelect.php?table=quiz";
+        const address = "./backend/sqlInsert.php?table=quiz";
         request.open("GET", address);
+        const body = '{"quizOwner":"'+email+'", "quizTitle":"'+title+'", "color":"'+color+'"}';
         request.onload = onDataLoaded;
-        request.send();
-    }else {
-        //generate a default question box
-    }
+        request.send(body);
 
-    const onDataLoaded = (event) => {
-        var data = event;
-        var response = request.responseText;    
-        data = JSON.parse(response);
-
-        //questions.innerHTML = 
-
+        const onDataLoaded = (event) => {
+            var data = event;
+            var response = request.responseText;    
+            data = JSON.parse(response);
+        }
     }
 
     function createQuestions(data){
-        var questions = document.getElementById("questions");
-        var address = "localhost:8000/questionCard.php?"
-        var body = 
+        var request = new XMLHttpRequest();
+        const id = getURLParameter("quiz_id");
+        const address = "./backend/sqlSelect.php?table=quiz&quizId=" + quizId;
+
+        request.open("GET", address);
+        request.onload = onDataLoaded;
+        request.send();
+
+        const onDataLoaded = (event) => {
+            var data = event;
+            var response = request.responseText;    
+            data = JSON.parse(response);
+            
+            console.log(data);
+
+        }
     }
 
     function OnColorChanged(){

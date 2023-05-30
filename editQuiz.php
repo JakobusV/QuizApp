@@ -37,19 +37,39 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
     //load data current from database
     var request = new XMLHttpRequest();
     const id = getURLParameter("quiz_id");
-    const address = "./backend/sqlSelect.php?table=quiz";
-    const body = '{"quizId":"'+id+'"}';
+    const address = "./backend/sqlSelect.php?table=quiz&quizId=" + id;
     request.open("GET", address);
     request.onload = onDataLoaded;
     request.send();
+
+    loadQuestions(id);
 
     const onDataLoaded = (event) => {
         var data = event;
         var response = request.responseText;    
         data = JSON.parse(response);
 
-        //questions.innerHTML = 
+        console.log(data);
 
+    }
+
+    function loadQuestions(quizId){
+        var request = new XMLHttpRequest();
+        const id = getURLParameter("quiz_id");
+        const address = "./backend/sqlSelect.php?table=quiz&quizId=" + quizId;
+
+        request.open("GET", address);
+        request.onload = onDataLoaded;
+        request.send();
+
+        const onDataLoaded = (event) => {
+            var data = event;
+            var response = request.responseText;    
+            data = JSON.parse(response);
+            
+            console.log(data);
+
+        }
     }
 
     function createQuestions(data){
@@ -74,9 +94,9 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         var name = document.getElementById("name").value;
         var color = document.getElementById("quiz-color-banner").style.background.valueOf("#");
         
-        var body = '{"name":"'+email+'", "color":"'+color+'", ""}';
+        var body = '{"name":"'+email+'", "color":"'+color+'"}';
 
-        request.open('POST', '../Backend/sqlInsert.php')
+        request.open('POST', '../Backend/sqlUpdate.php?table=quiz')
         request.send(body)
         request.onload = OnLoadJson
     }
