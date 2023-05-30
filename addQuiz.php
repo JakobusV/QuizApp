@@ -34,14 +34,18 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
     </div>
 </body>
 <script type="text/javascript">
-    //load data current from database
-    var request = new XMLHttpRequest();
-    const id = getURLParameter("quiz_id");
-    const address = "./backend/sqlSelect.php?table=quiz";
-    const body = '{"quizId":"'+id+'"}';
-    request.open("GET", address);
-    request.onload = onDataLoaded;
-    request.send();
+    if(getURLParameter('update') == true){
+        //load data current from database
+        var request = new XMLHttpRequest();
+        const id = getURLParameter("quiz_id");
+
+        const address = "./backend/sqlSelect.php?table=quiz";
+        request.open("GET", address);
+        request.onload = onDataLoaded;
+        request.send();
+    }else {
+        //generate a default question box
+    }
 
     const onDataLoaded = (event) => {
         var data = event;
@@ -74,7 +78,7 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         var name = document.getElementById("name").value;
         var color = document.getElementById("quiz-color-banner").style.background.valueOf("#");
         
-        var body = '{"name":"'+email+'", "color":"'+color+'", ""}';
+        var body = '{"name":"'+email+'", "color":"'+color+'", ""}'
 
         request.open('POST', '../Backend/sqlInsert.php')
         request.send(body)

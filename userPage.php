@@ -13,7 +13,7 @@ GenerateHeader('User Page', ['userPage.css']);
                 <h2>Fake User</h2>
                 <p>Your Quizzes</p>
                 <div class="quizzes-container">
-                    <a class="quiz-card" href="./editQuiz.php">
+                    <a class="quiz-card" href="./editQuiz.php?quiz_id=" + id>
                         <div class="quiz-body">
                             <div class="quiz-title">Quiz Name</div>
                             <p>Description</p>
@@ -52,6 +52,35 @@ GenerateHeader('User Page', ['userPage.css']);
 </body>
 <script type="text/javascript">
     var request = new XMLHttpRequest();
+    const address = "./backend/sqlSelect.php?table=quiz";
 
+    request.open("GET", address);
+    request.onload = onDataLoaded;
+    request.send();
+
+    const onDataLoaded = (event) => {
+        var data = event;
+        var response = request.responseText;    
+        data = JSON.parse(response);
+    }
+
+    function generateQuizzes(data) {
+        for(var i in data) {
+            var request = new XMLHttpRequest();
+            const address = "quizCard.php?quizId=" + data[i].id + "&name=" + data[i].title + "&color=" + data[i].color + "&description=" + data[i].description;
+
+            request.open("GET", address);
+            request.onload = updateQuizContainer;
+            request.send();
+        }
+    }
+
+    const updateQuizContainer = (event) => {
+        var data = event;
+        var response = request.responseText;    
+        data = JSON.parse(response);
+
+        document.getElementById("quizzes-container").innerHTML += data;
+    }
 </script>
 <?php
