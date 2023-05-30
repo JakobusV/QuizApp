@@ -34,14 +34,15 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
     </div>
 </body>
 <script type="text/javascript">
+    var questions = [];
 
     function createQuiz() {
         var request = new XMLHttpRequest();
-        const id = getURLParameter("quiz_id");
 
         const address = "./backend/sqlInsert.php?table=quiz";
-        request.open("GET", address);
         const body = '{"quizOwner":"'+email+'", "quizTitle":"'+title+'", "color":"'+color+'"}';
+
+        request.open("POST", address);
         request.onload = onDataLoaded;
         request.send(body);
 
@@ -52,14 +53,15 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         }
     }
 
-    function createQuestions(data){
+    function createQuestions(userId, question, rightAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3){
         var request = new XMLHttpRequest();
         const id = getURLParameter("quiz_id");
-        const address = "./backend/sqlSelect.php?table=quiz&quizId=" + quizId;
+        const address = "./backend/sqlInsert.php?table=question";
+        const body = '{"questionContainer":"'+email+'", "question":"'+title+'", "rightAnswer":"'+rightAnswer+'", "wrongAnswer1":"'+wrongAnswer1+'", "wrongAnswer2":"'+wrongAnswer2+'", "wrongAnswer3":"'+wrongAnswer3+'"}';
 
-        request.open("GET", address);
+        request.open("POST", address);
         request.onload = onDataLoaded;
-        request.send();
+        request.send(body);
 
         const onDataLoaded = (event) => {
             var data = event;
