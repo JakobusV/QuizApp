@@ -37,6 +37,7 @@ if (isset($_GET['u']))
 </body>
 
 <script>
+    const isMyPage = document.getElementById('myPageHidden').value;
     const getUserData = async () => {
         // get username from url param
         var urlFormatParams = window.location.search;
@@ -69,14 +70,22 @@ if (isset($_GET['u']))
         json.forEach((data) => {
             quizElements.push(QuizElement(data));
         });
+
+        // if my page then add addquiz option
+        if (isMyPage) {
+            quizElements.push(`
+                <a class="quiz-card" href="./addQuiz.php">
+                    <div class="quiz-body">
+                        <div class="quiz-title">Create New Quiz</div>
+                    </div>
+                </a>`);
+        }
+
         // apply to container
         container.innerHTML = quizElements.join('\n');
     }
 
     const QuizElement = (data) => {
-
-        let isMyPage = document.getElementById('myPageHidden').value;
-
         let quizElement = `
                 <div class="quiz-card">
                     <div class="quiz-body">

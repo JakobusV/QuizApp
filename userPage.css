@@ -77,6 +77,11 @@ body {
     grid-gap: 1rem;
 }
 
+a.quiz-card {
+    cursor:pointer;
+    text-decoration: none;
+}
+
 .quiz-card {
     background-color: #316bff;
     border: 0.05rem solid black;
