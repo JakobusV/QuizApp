@@ -33,11 +33,12 @@ if (array_key_exists("username", $data)) {
 
     if($selectedUser != "[]"){
         $json = json_decode($selectedUser);
+        $id = $json[0]->id;
         $username = $json[0]->username;
         $isAdmin = $json[0]->isAdmin;
 
         include_once "utility.php";
-        CreateSession('current_user', array('username'=>$username, 'auth'=>$isAdmin));
+        CreateSession('current_user', array('id'=>$id, 'username'=>$username, 'auth'=>$isAdmin));
         echo "Login Validated";
     } else {
         echo "Login Invalid";
