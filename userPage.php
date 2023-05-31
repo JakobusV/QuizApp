@@ -1,14 +1,24 @@
 <?php
 include_once 'header.php';
+include_once 'utility.php';
 include_once 'backend/backendUtils.php';
 include_once 'backend/models.php';
 GenerateHeader('User Page', ['userPage.css']);
 CanIBeHere();
+$myPage = false;
+$username = '';
+
+if (isset($_GET['u']))
+    $userSession = GetSession('current_user');
+    if (isset($userSession))
+        if ($userSession['username'] == $_GET['u'])
+            $myPage = true;
 
 ?>
 <body>
     <?php
     GenerateNavigationElement();
+    echo $myPage;
     ?>
     <div class="body-container">
         <div class="info-container">
