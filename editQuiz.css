@@ -69,7 +69,8 @@ body {
     width: 25px;
     height: 25px;
     align-self: end;
-    position: absolute
+    position: absolute;
+    cursor:pointer;
 }
 
 .answer-box {
