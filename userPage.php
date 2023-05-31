@@ -97,7 +97,7 @@ if (isset($userSession)) {
                         <div class="quiz-title">${data.title}</div>
                         <div class="quiz-link-cont">
                             <a href="./playQuiz.php?q=${data.id}">PLAY!</a>
-                            ${(isMyPage) ? `<a href="./editQuiz.php?quiz_id=${data.id}">EDIT!</a>` : ''}
+                            ${(isMyPage) ? `<a href="./editQuiz.php?q=${data.id}">EDIT!</a>` : ''}
                         </div>
                     </div>
                 </div>`;
