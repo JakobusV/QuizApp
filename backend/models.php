@@ -2,12 +2,12 @@
 class BaseModel {
     public int $id;
     /**
-    * Allows for all or specific columns to be retrieved on table, returns query string for execution.
-    * @param mixed $columns Optional: Columns that exist within the table, used to specify return data. If blank will return all columns.
-    * @param mixed $filters Optional: Filters for the query specified by strings. Filters are only attached with AND operators.
+    * Allows for all or specific columns to be retrieved on table, returns query string for execution.
+    * @param mixed $columns Optional: Columns that exist within the table, used to specify return data. If blank will return all columns.
+    * @param mixed $filters Optional: Filters for the query specified by strings. Filters are only attached with AND operators.
     * @param bool  $json    Optional: Defaults to true, either returns columns as json or plain
-    * @return string Query for phpapi database
-    */
+    * @return string Query for phpapi database
+    */
     public function SelectQuery($columns = array(), $filters = array(), $json = true, $limit = 100) {
         foreach ($columns as $column)
             $this->ValidateColumn($column);
@@ -59,11 +59,11 @@ class BaseModel {
             ' '.$filter.' LIMIT '.$limit.';';
     }
     /**
-    * Creates SQL JSON_OBJECT format or plain comma seperated format for select statement.
-    * @param mixed $columns
+Â Â Â  * Creates SQL JSON_OBJECT format or plain comma seperated format for select statement.
+Â Â Â  * @param mixed $columns
     * @param bool  $json Defaults to true, either returns columns as json or plain
-    * @return array|string
-    */
+    * @return array|string
+    */
     private function CreateSelectColumnFormat($columns = array(), $json = true) {
         if (count($columns) == 0)
             $columns = array_keys(get_class_vars(get_class($this)));
@@ -111,9 +111,9 @@ class BaseModel {
         }
     }
     /**
-    * Generic insert query utilizing all class specific properties.
-    * @return string
-    */
+Â Â Â  * Generic insert query utilizing all class specific properties.
+Â Â Â  * @return string
+Â Â Â  */
     public function InsertQuery() {
         $values = get_class_vars(get_class($this));
         array_splice($values, 0, 1);
@@ -125,9 +125,9 @@ class BaseModel {
         return $query.$columnNames.' VALUES ('.join(', ', $columnValues).');';
     }
     /**
-    * Generic update query utilizing all class properties.
-    * @return string
-    */
+    * Generic update query utilizing all class properties.
+    * @return string
+    */
     public function UpdateQuery() {
         $values = get_class_vars(get_class($this));
         $query = 'UPDATE '.get_class($this).' SET ';
@@ -138,35 +138,35 @@ class BaseModel {
         return $query;
     }
     /**
-    * Generic delete query utilizing class' id property.
-    * @return string
-    */
+    * Generic delete query utilizing class' id property.
+    * @return string
+    */
     public function DeleteQuery() {
         return 'DELETE FROM '.get_class($this).' WHERE id = '.$this->id;
     }
     /**
-    * Create SQL where statement using equals. Used for exact strings or number datatypes.
-    * @param mixed $column
-    * @param mixed $value
-    * @return string
+    * Create SQL where statement using equals. Used for exact strings or number datatypes.
+    * @param mixed $column
+    * @param mixed $value
+    * @return string
     */
     public function CreateFilterExact($column, $value) {
         return $column.'='.$this->FormatColumnValue($value);
     }
     /**
-    * Create SQL where statement using LIKE. Used for stirngs and text datatypes.
-    * @param mixed $column
-    * @param mixed $value
-    * @return string
-    */
+    * Create SQL where statement using LIKE. Used for stirngs and text datatypes.
+    * @param mixed $column
+    * @param mixed $value
+    * @return string
+    */
     public function CreateFilterLike($column, $value) {
         return $column." LIKE '%".$value."%'";
     }
     /**
-    * Perform check to see if column exists within class. Throws UnexpectedValueException if column not found.
-    * @param mixed $column
-    * @throws UnexpectedValueException
-    */
+    * Perform check to see if column exists within class. Throws UnexpectedValueException if column not found.
+    * @param mixed $column
+    * @throws UnexpectedValueException
+    */
     protected function ValidateColumn($column) {
         if (!property_exists(get_class($this), $column))
             throw new UnexpectedValueException("Column not found within table. column:".$column." table:".get_class($this));
@@ -258,6 +258,7 @@ class quiz extends BaseModel {
     public int $id;
     public int $userId;
     public string $title;
+    public string $color;
 }
 
 class question extends BaseModel {

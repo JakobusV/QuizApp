@@ -67,6 +67,7 @@ function quizInsert($data) {
         $quiz = new quiz();
         $quiz->userId = $data["quizOwner"];
         $quiz->title = $data["quizTitle"];
+        $quiz->color = $data["color"];
 
         return AffectedRowsExecution($quiz->InsertQuery());
     }

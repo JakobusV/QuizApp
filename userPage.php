@@ -8,11 +8,16 @@ CanIBeHere();
 $myPage = false;
 $username = '';
 
-if (isset($_GET['u']))
-    $userSession = GetSession('current_user');
-    if (isset($userSession))
+$userSession = GetSession('current_user');
+if (isset($userSession)) {
+    if (isset($_GET['u'])) {
         if ($userSession['username'] == $_GET['u'])
             $myPage = true;
+    } else
+        header('Location: userPage.php?u='.$userSession['username']);
+} else 
+    header('Location: login.php');
+
 
 ?>
 <body>
@@ -92,7 +97,7 @@ if (isset($_GET['u']))
                         <div class="quiz-title">${data.title}</div>
                         <div class="quiz-link-cont">
                             <a href="./playQuiz.php?q=${data.id}">PLAY!</a>
-                            ${(isMyPage) ? `<a href="./editQuiz.php?quiz_id=${data.id}">EDIT!</a>` : ''}
+                            ${(isMyPage) ? `<a href="./editQuiz.php?q=${data.id}">EDIT!</a>` : ''}
                         </div>
                     </div>
                 </div>`;

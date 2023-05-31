@@ -117,7 +117,7 @@ CanIBeHere();
 
     const EndQuiz = () => {
         questionCounterP.innerHTML = 'Quiz Results:';
-        questionContentH2.innerHTML = `${title}`;    
+        questionContentH2.innerHTML = `${title}`;   
         optionsContainer.innerHTML = `<h3>Final Score: ${points}/${questions.length}</h3>`;
         ToggleOptionButton();
     }

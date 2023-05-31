@@ -65,9 +65,10 @@ function userUpdate($data) {
  * @return string Result of update
  */
 function quizUpdate($data) {
-    if (array_key_exists("quizId", $data) && array_key_exists("quizOwner", $data) && array_key_exists("quizTitle", $data)) {
+    if (array_key_exists("quizId", $data) && array_key_exists('color', $data) && array_key_exists("quizOwner", $data) && array_key_exists("quizTitle", $data)) {
         $quiz = new quiz();
         $quiz->id = $data["quizId"];
+        $quiz->color = $data['color'];
         $quiz->userId = $data["quizOwner"];
         $quiz->title = $data["quizTitle"];
 

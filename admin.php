@@ -3,7 +3,10 @@ include_once 'header.php';
 include_once 'backend/backendUtils.php';
 include_once 'backend/models.php';
 GenerateHeader("Admin Page", ['admin.css']);
-//CanIBeHere(true);
+CanIBeHere(true);
+
+if (isset($_GET['table']))
+    $currentTable = $_GET['table'];
 
 /**
  * Echos a secondary nav bar used to quickly travel between database table pages.
@@ -130,7 +133,7 @@ function AdminRowToTableData(stdClass $row) {
     $id = $row->id;
     $buildArray = ['<td>'];
     $rowValues = get_object_vars($row);
-    $rowValues[] = "<a href=\"profile.php?u=$id\">X</a>";
+    $rowValues[] = "<button id=\"$id\" onclick=\"Delete(this)\">X</button>";
     $buildArray[] = implode('</td><td>', $rowValues);
     $buildArray[] = '</td>';
     $tableDataHTML = implode('', $buildArray);
@@ -156,4 +159,16 @@ function UnsuccessfulPage() {
     BuildPage();
     ?>
 </body>
+
+<script>
+    const Delete = async (btn) => {
+        await fetch('backend/sqlDelete.php?table=<?php echo $currentTable ?>', {
+            method: 'POST',
+            body: `{"<?php echo $currentTable ?>Id":"${btn.id}"}`
+        });
+        td = btn.parentElement;
+        tr = td.parentElement;
+        tr.remove();
+    }
+</script>
 <?php
