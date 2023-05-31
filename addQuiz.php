@@ -141,6 +141,8 @@ if (isset($userSession))
             createQuestion(quiz_id, question.value, rightAnswer.value, wrongAnswer1.value, wrongAnswer2.value, wrongAnswer3.value);
             i++;
         }
+
+        window.location.href = 'userPage.php';
     }
 
     function GenerateBlankQuestionBox(number) {
