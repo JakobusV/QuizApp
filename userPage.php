@@ -26,7 +26,8 @@ if (isset($userSession))
                 <h2 id="username"></h2>
                 <hr />
                 <p>Your Quizzes</p>
-                <div class="quizzes-container"></div>
+                <div class="quizzes-container">
+                </div>
             </div>
         </div>
         <img class="profile-img"

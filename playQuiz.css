@@ -51,6 +51,16 @@ body {
     padding-top: 50px;
 }
 
+.options-container h3 {
+    background-color: white;
+    width: 100%;
+    padding: 1rem 0rem;
+    border-radius: 1rem;
+    text-align: center;
+    align-self: center;
+    grid-column-end: span 2;
+}
+
 .answer-btn {
     border: 1px solid transparent;
     border-radius: 10px;

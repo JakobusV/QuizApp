@@ -13,7 +13,9 @@ CanIBeHere();
                 <p>Quiz:</p>
                 <h2></h2>
             </div>
-            <div class="options-container"></div>
+            <div class="options-container">
+
+            </div>
             <button class="option-btn" onclick="StartQuiz()">Start Quiz</button>
         </div>
     </div>
@@ -24,7 +26,7 @@ CanIBeHere();
     let title = '';
     let questionNumber = 0;
     let points = 0;
-    let questionCounterP = document.querySelector('.question-box p');
+    let questionCounterP = document.querySelector('.question-box p');    
     let questionContentH2 = document.querySelector('.question-box h2');
     let optionsContainer = document.querySelector('.options-container');
 
@@ -115,7 +117,7 @@ CanIBeHere();
 
     const EndQuiz = () => {
         questionCounterP.innerHTML = 'Quiz Results:';
-        questionContentH2.innerHTML = `${title}`;
+        questionContentH2.innerHTML = `${title}`;   
         optionsContainer.innerHTML = `<h3>Final Score: ${points}/${questions.length}</h3>`;
         ToggleOptionButton();
     }
