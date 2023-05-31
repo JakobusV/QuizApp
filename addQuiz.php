@@ -37,20 +37,23 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         return URLParams.get(parameterKey);
     }
 
-    var id = Number(getURLParameter("userId"));
+    const id = Number(getURLParameter("userId"));
     var questionsCount = 0;
-    var quizId;
 
     OnAddQuestion();
 
-    function createQuiz(title, color) {
-        var request = new XMLHttpRequest();
-
-        const address = "./backend/sqlInsert.php?table=quiz";
-        const body = `{"quizOwner":${id}, "quizTitle":"${title}", "color":"${color}"}`;
-
-        request.open("POST", address);
-        request.send(body);
+    const createQuiz = async (title, color) => {
+        await fetch("./backend/sqlInsert.php?table=quiz", {
+            method: 'POST',
+            body: `{"quizOwner":${id}, "quizTitle":"${title}", "color":"${color}"}`
+        });
+        const response = await fetch('./backend/sqlSelect.php?table=quiz');
+        const json = await response.json();
+        let quiz_id = 0;
+        json.forEach(quiz => {
+            quiz_id = (quiz.id > quiz_id) ? quiz.id : quiz_id
+        });
+        return quiz_id;
     }
 
     async function getQuiz(title) {
@@ -114,13 +117,12 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         questionsCount--;
     }
 
-    function OnCreate() {
+    const OnCreate = async () => {
         var title =document.getElementById("title").value;
         var color = document.getElementById("color").value;
 
-        createQuiz(title, color);
-        var newQuiz = getQuiz(title);
-        console.log(newQuiz);
+        var quiz_id = await createQuiz(title, color);
+        console.log(quiz_id);
         let i = 1;
         while (i <= questionsCount) {
             var question = document.getElementById("question-" + i);
@@ -128,7 +130,7 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
             var wrongAnswer1 = document.getElementById("wrongAnswer1-" + i);
             var wrongAnswer2 = document.getElementById("wrongAnswer2-" + i);
             var wrongAnswer3 = document.getElementById("wrongAnswer3-" + i);
-            createQuestion(newQuiz.id, question.value, rightAnswer.value, wrongAnswer1.value, wrongAnswer2.value, wrongAnswer3.value);
+            createQuestion(quiz_id, question.value, rightAnswer.value, wrongAnswer1.value, wrongAnswer2.value, wrongAnswer3.value);
             i++;
         }
     }
