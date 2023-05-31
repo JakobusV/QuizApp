@@ -2,6 +2,13 @@
 include_once 'header.php';
 include_once 'questionCard.php';
 GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
+CanIBeHere();
+
+
+$userSession = GetSession('current_user');
+if (isset($userSession))
+    $id = $userSession['id'];
+
 ?>
 
 <body>
@@ -29,6 +36,7 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
             </div>
         </div>
     </div>
+    <input id="myIdHidden" type="hidden" value="<?php echo $id ?>" />
 </body>
 <script type="text/javascript">
 
@@ -37,7 +45,7 @@ GenerateHeader("Edit Quiz Page", ['editQuiz.css']);
         return URLParams.get(parameterKey);
     }
 
-    const id = Number(getURLParameter("userId"));
+    const id = Number(document.getElementById('myIdHidden').value);
     var questionsCount = 0;
 
     OnAddQuestion();
