@@ -12,7 +12,7 @@ GenerateHeader("Login Page", ['login.css']);
             <p>Username</p>
             <input id="username" class="inputs" />
             <p>Password</p>
-            <input id="password" class="inputs" />
+            <input id="password" class="inputs" type="password" />
             <button onclick="Login()" class="login-btn">Login</button>
             <p id="loginMessageBox"></p>
         </div>

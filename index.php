@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'header.php';
 GenerateHeader("Landing Page", ['homePage.css']);
 ?>
@@ -13,9 +13,9 @@ GenerateHeader("Landing Page", ['homePage.css']);
             <p>
                 New to Quiztopia? <br /> Create a free account below!
             </p>
-            <a href="./createAccount.php">get started</a>
+            <a href="./createAccount.php" class="redirect-button">Create Account</a>
             <p>Already have an account?</p>
-            <a href="./login.php">login</a>
+            <a href="./login.php" class="redirect-button">Login</a>
         </div>
     </div>
 </body>
