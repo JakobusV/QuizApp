@@ -18,6 +18,47 @@ class BaseModel {
         return 'SELECT '.$formattedColumns.' FROM '.get_class($this).' '.$filter.' LIMIT '.$limit.';';
     }
     /**
+     * Creates a dynamic join between two valid tables given and two valid columns to join by.
+     * @param string $joinedTable        Required: Table to join onto the base table.
+     * @param mixed $joinedColumns       Optional: Columns that exist within the joined table, used to specify return data. If blank will return all columns.
+     * @param string $joinedTargetColumn Required: Target column in the joined table to join on the origin column in the base table.
+     * @param string $joinType           Optional: Defaults to INNER, supports all join types.
+     * @param mixed $baseColumns         Optional: Columns that exist within the base table, used to specify return data. If blank will return all columns.
+     * @param string $baseOriginColumn   Required: Origin column in the base table to join with the target column in the joined table.
+     * @param mixed $filters             Optional: Filters for the query specified by strings. Filters are only attached with AND operators.
+     * @param bool $json                 Optional: Defaults to true, either returns columns as json or plain.
+     * @return string                    Query for phpapi database.
+     */
+    public function SelectJoinQuery($joinedTable = "", $joinedColumns = array(), $joinedTargetColumn = "", $joinType = "INNER", $baseColumns = array(), $baseOriginColumn = "", $filters = array(), $json = true, $limit = 100) {
+        // Validate joining table
+        $tableResult = $this->ValidateJoiningTable($joinedTable, $joinedColumns);
+        if (is_bool($tableResult) && $tableResult == false) throw new UnexpectedValueException("Table is not valid");
+
+        // Validate join type
+        $joinType = strtoupper($joinType);
+        if ($joinType != "LEFT" && $joinType != "INNER" && $joinType != "RIGHT" && $joinType != "CROSS") throw new UnexpectedValueException("Join type is not valid");
+
+        // Get formatted columns of both the base table and joined table
+        foreach ($baseColumns as $column)
+            $this->ValidateColumn($column);
+        if (count($baseColumns) == 0)
+            $baseColumns = array_keys(get_class_vars(get_class($this)));
+        if (count($joinedColumns) == 0)
+            $joinedColumns = array_keys(get_class_vars(get_class($tableResult)));
+        $this->ValidateColumn($baseOriginColumn);
+        $tableResult->ValidateColumn($joinedTargetColumn);
+        $formattedCombinedColumns = $this->CreateSelectColumnFormatForJoins($baseColumns, $joinedColumns, $json);
+
+        // Add filters
+        $filter = '';
+        if (count($filters) > 0)
+            $filter = 'WHERE '.join(' AND ', $filters);
+
+        return 'SELECT '.$formattedCombinedColumns.' FROM '.get_class($this).' as base '.$joinType.
+            ' JOIN '.get_class($tableResult).' as joined ON base.'.$baseOriginColumn.' = joined'.'.'.$joinedTargetColumn.
+            ' '.$filter.' LIMIT '.$limit.';';
+    }
+    /**
     * Creates SQL JSON_OBJECT format or plain comma seperated format for select statement.
     * @param mixed $columns
     * @param bool  $json Defaults to true, either returns columns as json or plain
@@ -35,10 +76,39 @@ class BaseModel {
         } else {
             $plainColumns = '';
             foreach($columns as $column)
-                $plainColumns .= "'".$column."', ";
+                $plainColumns .= "".$column.", ";
+            $plainColumns = trim($plainColumns);
+            $plainColumns = substr_replace($plainColumns, '', -1);
             return $plainColumns;
         }
 
+    }
+    /**
+     * Summary of CreateSelectColumnFormatForJoins
+     * @param mixed $baseColumns Columns from the base table
+     * @param mixed $joinedColumns Columns from the joining table
+     * @param mixed $json Defaults to true, either returns columns as json or plain
+     * @return array|string
+     */
+    private function CreateSelectColumnFormatForJoins($baseColumns, $joinedColumns, $json = true) {
+        if ($json) {
+            $jsonColumns = 'JSON_OBJECT(';
+            foreach($baseColumns as $column)
+                $jsonColumns .= "'".$column."', base.".$column.',';
+            foreach($joinedColumns as $column)
+                $jsonColumns .= "'joined".ucfirst($column)."', joined.".$column.',';
+            $jsonColumns = substr_replace($jsonColumns, ') as data', -1);
+            return $jsonColumns;
+        } else {
+            $plainColumns = '';
+            foreach($baseColumns as $column)
+                $plainColumns .= "base.".$column.", ";
+            foreach($joinedColumns as $column)
+                $plainColumns .= "joined.".$column.", ";
+            $plainColumns = trim($plainColumns);
+            $plainColumns = substr_replace($plainColumns, '', -1);
+            return $plainColumns;
+        }
     }
     /**
     * Generic insert query utilizing all class specific properties.
@@ -101,7 +171,34 @@ class BaseModel {
         if (!property_exists(get_class($this), $column))
             throw new UnexpectedValueException("Column not found within table. column:".$column." table:".get_class($this));
     }
-
+    /**
+     * Checks that the string table name is valid and validates all columns
+     * @param mixed $joinedTable Table name to be joined
+     * @param mixed $joinedTableColumns Columns of the joined table
+     * @return bool|question|quiz|user Returns table object or false if not valid
+     */
+    protected function ValidateJoiningTable($joinedTable, $joinedTableColumns) {
+        $joinedTable = strtolower($joinedTable);
+        // Valid table name?
+        if (!IsValidTable($joinedTable)) return false;
+        // Create new object based on name of table
+        $table;
+        switch($joinedTable) {
+            case "user":
+                $table = new user();
+                break;
+            case "quiz":
+                $table = new quiz();
+                break;
+            case "question":
+                $table = new question();
+                break;
+        }
+        // Validate columns based on object
+        foreach($joinedTableColumns as $column)
+            $table->ValidateColumn($column);
+        return $table;
+    }
     /**
      * Formats given value for sql query usage
      * String data types are surounded by single quotes
