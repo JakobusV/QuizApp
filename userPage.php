@@ -8,11 +8,16 @@ CanIBeHere();
 $myPage = false;
 $username = '';
 
-if (isset($_GET['u']))
-    $userSession = GetSession('current_user');
-if (isset($userSession))
-    if ($userSession['username'] == $_GET['u'])
-        $myPage = true;
+$userSession = GetSession('current_user');
+if (isset($userSession)) {
+    if (isset($_GET['u'])) {
+        if ($userSession['username'] == $_GET['u'])
+            $myPage = true;
+    } else
+        header('Location: userPage.php?u='.$userSession['username']);
+} else 
+    header('Location: login.php');
+
 
 ?>
 <body>
