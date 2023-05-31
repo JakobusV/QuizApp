@@ -18,7 +18,6 @@ if (isset($_GET['u']))
 <body>
     <?php
     GenerateNavigationElement();
-    echo $myPage;
     ?>
     <div class="body-container">
         <div class="info-container">
@@ -34,6 +33,7 @@ if (isset($_GET['u']))
         <img class="profile-img"
             src="https://th.bing.com/th/id/R.6e0f2f6bab06c008c79a3b280db49342?rik=jsupiHsPJSF3lA&riu=http%3a%2f%2fassets0.prcdn.com%2fuk%2fpeople%2fdefault-profile.png%3f1406639312&ehk=fgzMewvFjuDc4jTAGFrQAJ%2fhZD3vLHtzxhxb%2bnle3cU%3d&risl=&pid=ImgRaw&r=0" />
     </div>
+    <input id="myPageHidden" type="hidden" value="<?php echo $myPage ?>" />
 </body>
 
 <script>
@@ -74,12 +74,21 @@ if (isset($_GET['u']))
     }
 
     const QuizElement = (data) => {
-        return `<a class="quiz-card" href="./playQuiz.php?q=${data.id}">
+
+        let isMyPage = document.getElementById('myPageHidden').value;
+
+        let quizElement = `
+                <div class="quiz-card">
                     <div class="quiz-body">
                         <div class="quiz-title">${data.title}</div>
-                        <p>Click to play quiz!</p>
+                        <div class="quiz-link-cont">
+                            <a href="./playQuiz.php?q=${data.id}">PLAY!</a>
+                            ${(isMyPage) ? `<a href="./editQuiz.php?quiz_id=${data.id}">EDIT!</a>` : ''}
+                        </div>
                     </div>
-                </a>`;
+                </div>`;
+
+        return quizElement;
     }
 
     getUserData();
