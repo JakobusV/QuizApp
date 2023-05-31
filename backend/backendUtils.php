@@ -30,6 +30,7 @@ function SelectExecution($query) {
     $dataSet = @mysqli_query($dbConnection, $query);
     $result = "";
 
+    
     if ($dataSet) {
         $rowArray = [];
         while ($row = @mysqli_fetch_array($dataSet)) {

@@ -37,7 +37,7 @@ if (array_key_exists("username", $data)) {
         $isAdmin = $json[0]->isAdmin;
 
         include_once "utility.php";
-        CreateSession($username, $isAdmin);
+        CreateSession('current_user', array('username'=>$username, 'auth'=>$isAdmin));
         echo "Login Validated";
     } else {
         echo "Login Invalid";
